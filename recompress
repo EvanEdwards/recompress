@@ -111,7 +111,6 @@ Processed files are saved to the "_recompressed" directory in the current workin
 - ffmpeg
 - ffprobe
 - pandoc (for help display and manpage installation)
-- h2 utility (for formatted output)
 
 # BUGS
 
@@ -136,7 +135,9 @@ function checkoff { printf -- '- \e[42m[✓]\e[0m %s\e[K\n' "$*" ; }
 command -v ffmpeg >/dev/null 2>&1 || err "ffmpeg not found. Please install it."
 command -v ffprobe >/dev/null 2>&1 || err "ffprobe not found. Please install it."
 command -v pandoc >/dev/null 2>&1 || err "pandoc not found. Please install it for help pages."
-command -v h2 >/dev/null 2>&1 || err "h2 (part of the h1 package) not found. Please install it for formatting output."
+
+# Polyfill
+command -v h2 &> /dev/null || function h2 { printf "\e[30;48;2;255;170;0m %s \e[K\e[0m\n" "$*" ; }
 
 
 # Argument Handling

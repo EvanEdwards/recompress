@@ -8,10 +8,11 @@ A utility for recompressing video files to x265 (HEVC) 10-bit format with optimi
 
 `recompress` automatically detects system resources and optimizes encoding settings for the best balance of quality and performance. It intelligently preserves all streams from the original file, including audio, subtitles, chapters, and metadata.
 
-Key features:
+**Features:**
+
 - Automatic detection and utilization of all available CPU cores
 - High-quality x265 (HEVC) 10-bit encoding with customizable quality settings
-- Automatic resolution scaling for videos exceeding specified dimensions
+- Automatic resolution scaling for videos exceeding specified dimensions (default is 1080p)
 - Preservation of all streams (audio, subtitles, chapters, metadata, etc.)
 - Smart detection of already-encoded HEVC files to avoid re-encoding
 
@@ -22,17 +23,12 @@ Key features:
    git clone https://github.com/EvanEdwards/recompress.git
    ```
 
-2. Make the script executable:
+2. Install to local user:
    ```bash
-   chmod +x recompress
+   chmod +x recompress && mv recompress "$HOME/.local/share/bin/."
    ```
 
-3. Optionally, install to your PATH:
-   ```bash
-   sudo ln -s $(pwd)/recompress /usr/local/bin/recompress
-   ```
-
-4. Install the manpage (optional):
+4. Install the manpage (optional, as --help also displays it):
    ```bash
    recompress -M
    ```
@@ -42,7 +38,6 @@ Key features:
 - ffmpeg (with libx265 support)
 - ffprobe
 - pandoc (for help pages only)
-- h2 utility (for formatted output)
 
 ## Basic Usage
 
@@ -61,7 +56,7 @@ Force recompression of already HEVC encoded files:
 recompress -f video.mp4
 ```
 
-By default, processed files are saved to the "_recompressed" directory in the current working directory.
+By default, processed files are saved to the "_recompressed" directory in the current working directory. My personal workflow is to compress a bunch of files, check the quality and copy them down to the parent directory, overwriting the original.
 
 ## Options
 
@@ -97,13 +92,11 @@ recompress -x 1280 -y 720 video.mp4
 
 ## License
 
-MIT License
-
-Copyright (c) 2025 Evan A. Edwards (@EvanEdwards)
+MIT License - Copyright (c) 2025 Evan A. Edwards <evan@cheshirehall.net>
 
 ## See Also
 
 For more details, see the manpage:
 ```bash
-man recompress  # If installed via -M
+man recompress  # Install with: recompress -M
 ```
